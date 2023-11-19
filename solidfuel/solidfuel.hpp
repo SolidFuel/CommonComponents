@@ -16,5 +16,7 @@
    END_JUCE_MODULE_DECLARATION
 *******************************************************************************/
 
+#pragma once
+
 #include "Source/BoxComponent.hpp"
 #include "Source/ButtonGroupComponent.hpp"
