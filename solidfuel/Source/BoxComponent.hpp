@@ -28,10 +28,10 @@ public :
 
     BoxComponent() {};
 
-    BoxComponent(Orientation o) : orient_(o) {};
+    BoxComponent(Orientation o) : orient_(o) {}
 
     BoxComponent(Orientation o, bool drawBorder) : 
-        orient_(o), draw_border_(drawBorder) {};
+        orient_(o), draw_border_(drawBorder) {}
 
     juce::Array<juce::Grid::TrackInfo> layoutTemplate;
 

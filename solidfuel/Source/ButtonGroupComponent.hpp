@@ -24,10 +24,11 @@ public :
         int top, bottom, left, right;
     };
 
-    ButtonGroupComponent() {};
+    ButtonGroupComponent() {}
 
     ButtonGroupComponent(int groupId, Orientation o = Horizontal, bool border = false) : 
-        orient_(o), group_id_(groupId), draw_border_(border) {};
+        orient_(o), group_id_(groupId), draw_border_(border) 
+    {}
 
     void add(juce::TextButton *btn) {
         juce::GroupComponent::addAndMakeVisible(btn);
