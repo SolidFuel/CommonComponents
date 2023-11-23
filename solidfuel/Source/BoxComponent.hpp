@@ -26,7 +26,7 @@ public :
         int top, bottom, left, right;
     };
 
-    BoxComponent() {};
+    BoxComponent() {}
 
     BoxComponent(Orientation o) : orient_(o) {}
 
