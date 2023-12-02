@@ -10,7 +10,25 @@
  * in the root directory.
  ****/
 
-#include "solidfuel.hpp"
+#pragma once
 
-#include "Source/BoxComponent.cpp"
-#include "Source/ButtonGroupComponent.cpp"
+#include <juce_gui_basics/juce_gui_basics.h>
+
+#include "functional"
+
+namespace solidfuel {
+
+class ValueListener : public juce::Value::Listener {
+    void valueChanged(juce::Value &v) { 
+        //DBGLOG("ValueListener cb triggered")
+        if (onChange) {
+            //DBGLOG("ValueListener calling onChange")
+            onChange(v);
+        } 
+    }
+
+public :
+    std::function<void(juce::Value &)> onChange;
+};
+
+} // namespace
