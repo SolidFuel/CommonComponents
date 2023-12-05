@@ -90,6 +90,11 @@ if [[ "$do_export" == "ps" ]]; then
     Q='"'
 fi
 
+SEP="/"
+if [[ "$OS_TAG" == "win64" ]]; then
+    SEP="\\"
+fi
+
 # Output Variables from the config file
 echo "${export}OS_TAG=$Q${OS_TAG}$Q";
 while read -r line
@@ -117,17 +122,17 @@ case "$OS_TAG" in
 "macos")
     ARTIFACT_PATH="."
     BUILD_FILE=${SF_PROJECT}.vst3
-    VST3_BUILD_PATH="Source/${SF_PROJECT}_artefacts/Release/VST3"
+    SEP="/"
     ;;
 "linux")
     ARTIFACT_PATH="."
     BUILD_FILE=${SF_PROJECT}.vst3
-    VST3_BUILD_PATH="Source/${SF_PROJECT}_artefacts/Release/VST3"
+    SEP="/"
     ;;
 "win64")
     ARTIFACT_PATH="${SF_PROJECT}.vst3\\Contents\\x86_64-win"
     BUILD_FILE=${SF_PROJECT}.vst3
-    VST3_BUILD_PATH="Source\\${SF_PROJECT}_artefacts\\Release\\VST3"
+    SEP="\\"
     ;;
 *)
     echo "ERROR: unknown OS_TAG = '$OS_TAG'"
@@ -140,11 +145,13 @@ if [[ -n "$GITHUB_OUTPUT" ]]; then
     IN_RUNNER=1
 fi
 
+VST3_BUILD_PATH="Source${SEP}${SF_PROJECT}_artefacts${SEP}Release${SEP}VST3"
 
 # OUTPUT derived variables
 echo "${export}SF_PROJ_LOWER=$Q${PROJ_LOWER}$Q";
 echo "${export}SF_ARTIFACT_PATH=$Q${ARTIFACT_PATH}$Q";
 echo "${export}SF_BUILD_FILE=$Q${BUILD_FILE}$Q";
 echo "${export}SF_VST3_BUILD_PATH=$Q${VST3_BUILD_PATH}$Q";
+echo "${export}SF_VST3_PLUGIN_PATH=$Q${VST3_BUILD_PATH}${SEP}${ARTIFACT_PATH}${SEP}${BUILD_FILE}$Q";
 echo "${export}SF_OUTPUT_STEM=$Q${OUTPUT_STEM}$Q";
 echo "${export}SF_IN_RUNNER=$Q${IN_RUNNER}$Q";
